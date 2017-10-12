@@ -1,0 +1,17 @@
+body{
+	background-image: url("../img/bg.jpg");
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+h1{
+	color: #007ca2;
+	font-size: 3em;
+}
+#form{
+	max-width: 70%;
+	background-color: white;
+	opacity: 0.9;
+	border: 1px solid #007ca2;
+}

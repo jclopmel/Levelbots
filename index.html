@@ -3,16 +3,54 @@
   <head>
     <title>Code test</title>
     <link rel="stylesheet" href="styles/bootstrap.css"">
+    <link rel="stylesheet" href="styles/style.css"">
   </head>
 
   <body>
     <script src="js/jquery-2.1.4.js"></script>
 
-    <div id="maincontainer" class="container">
-      
+    <h1 class="text-center py-4">Companies information search</h1>
+
+    <!--Form container-->
+
+    <div id="form" class="container rounded p-4">
+      <form action="">
+        <div class="form-group">
+
+          <select class="form-control form-control-lg py-1">
+            <option>Choose the company you are looking for</option>
+          </select>
+
+        <div class="container my-2">
+          <div class="row">
+            <div class="col-md-5 offset-md-1">
+                <label class="form-check-label">
+                  <input id="staff" class="form-check-input" type="radio" value="">
+                  Show me staff from this company
+                </label>
+            </div>
+            <div class="col-md-5">
+                <label class="form-check-label py-1">
+                <input id="products" class="form-check-input" type="radio" value="">
+                Show me products from this company
+              </label>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <button type="submit" class="btn btn-primary btn-lg my-1">Search now</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+    <!--Results container-->
+
+    <div id="maincontainer" class="container">  
     </div>
     
 
     <script src="js/index.js"></script>
+    <!--<script src="js/BDconnect.js"></script>-->
   </body>
 </html>

@@ -1,17 +1,19 @@
 $.getJSON( "https://levelbot.com/hiring/companies.json", function( data ) {                 //data request
-    var info = data;
+    var info    = data;
+    var names   = [];
     /*-------------------------------------------- GET for name, url and id---------------------------------------*/
-    /*for (var i=0; i<info.length; i++) {
+    for (var i=0; i<info.length; i++) {
 
         var showData    = data[i].name;                                                     //Data request: name
         var showData2   = data[i].homepage_url;                                             //Data request: url                       
         var showData3   = data[i]._id.$oid;                                                 //Data request: id
 
-        console.log("Nombre: "+showData+" y su web: "+showData2+" y su ID: "+showData3);
-    }*/
+        names.push(showData);
+        $("select").append("<option value="+showData+">"+showData+"</option>");
+    }
 
     /*-------------------------------------------- GET for company object-----------------------------------------*/
-    //No me queda claro es es showData1 o showData3
+    //No me queda claro es showData1 o showData3
     /*for (var i=0; i<info.length; i++) {
 
         var showData    = data[i];                                                     //Data request: name           
@@ -37,7 +39,7 @@ $.getJSON( "https://levelbot.com/hiring/companies.json", function( data ) {     
     /*-------------------------------------------- GET for name, staff and position---------------------------------------*/
     
     //Mantiene un filtro según los que trabajan actualmente o no
-    for (var i=0; i<info.length; i++) {
+    /*for (var i=0; i<info.length; i++) {
 
         var showData    = data[i].name;                                                 //Data request: name
         var showData2   = data[i].relationships;
@@ -55,9 +57,9 @@ $.getJSON( "https://levelbot.com/hiring/companies.json", function( data ) {     
 
             }                      
         }
-    }
+    }*/
 
 
-    console.log(info);
+    console.log(names);
 
 });

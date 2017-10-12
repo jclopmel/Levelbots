@@ -9,7 +9,7 @@
   "author": "juan carlos lopez mellet",
   "license": "ISC",
   "dependencies": {
-  	"mongo":"",
-    "express": ""
+    "express": "^4.16.2",
+    "mongodb": "^2.2.32"
   }
 }
