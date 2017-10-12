@@ -22,7 +22,7 @@ $.getJSON( "https://levelbot.com/hiring/companies.json", function( data ) {     
     }*/
 
     /*-------------------------------------------- GET for name and products---------------------------------------*/
-    for (var i=0; i<info.length; i++) {
+    /*for (var i=0; i<info.length; i++) {
 
         var showData    = data[i].name;                                                 //Data request: name
         var showData2   = data[i].products;
@@ -32,7 +32,32 @@ $.getJSON( "https://levelbot.com/hiring/companies.json", function( data ) {     
             var prod    = showData2[j].name;                                            //Data request: products by name
             console.log("Nombre : "+showData+" productos: "+prod);                      
         }
+    }*/
+
+    /*-------------------------------------------- GET for name, staff and position---------------------------------------*/
+    
+    //Mantiene un filtro según los que trabajan actualmente o no
+    for (var i=0; i<info.length; i++) {
+
+        var showData    = data[i].name;                                                 //Data request: name
+        var showData2   = data[i].relationships;
+
+        for (var j=0; j<showData2.length; j++) {
+
+            var current         = showData2[j].is_past;                                             //Data request: staff currently working
+            if(!current){
+
+                var staffName       = showData2[j].person.first_name;                               //Data request: staff by first_name
+                var staffSurname    = showData2[j].person.last_name;                                //Data request: staff by last_name
+                var title           = showData2[j].title;                                           //Data request: staff by title
+
+                console.log("Empresa : "+showData+" nombre: "+staffName+" "+staffSurname+" y su puesto es: "+title);
+
+            }                      
+        }
     }
+
+
     console.log(info);
 
 });
