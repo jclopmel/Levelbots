@@ -10,7 +10,16 @@ $.getJSON( "https://levelbot.com/hiring/companies.json", function( data ) {     
 
         names.push(showData);
         $("select").append("<option value="+showData+">"+showData+"</option>");
+
+        if (showData == $("select").val()){
+            $("select").append("<h3>"+showData+"</h3>");
+            $("select").append("<h3>"+showData+"</h3>");
+
+        }
+
     }
+
+    
 
     /*-------------------------------------------- GET for company object-----------------------------------------*/
     //No me queda claro es showData1 o showData3
