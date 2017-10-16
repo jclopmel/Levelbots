@@ -1,74 +1,83 @@
-$.getJSON( "https://levelbot.com/hiring/companies.json", function( data ) {                 //data request
-    var info    = data;
-    var names   = [];
-    /*-------------------------------------------- GET for name, url and id---------------------------------------*/
-    for (var i=0; i<info.length; i++) {
+    function containerClean (){
+        $("#maincontainer").empty();
+    }
 
-        var showData    = data[i].name;                                                     //Data request: name
-        var showData2   = data[i].homepage_url;                                             //Data request: url                       
-        var showData3   = data[i]._id.$oid;                                                 //Data request: id
+    var companiesJson = [];
 
-        names.push(showData);
-        $("select").append("<option value="+showData+">"+showData+"</option>");
+    $.getJSON( "https://levelbot.com/hiring/companies.json", function( data ) {                 //data request
+        var info    = data;
+        var names   = [];
 
-        if (showData == $("select").val()){
-            $("select").append("<h3>"+showData+"</h3>");
-            $("select").append("<h3>"+showData+"</h3>");
+        var showData,showData2,showData3,showData4,showData5;
 
+
+        /*-------------------------------------------- Scrapping and constructor---------------------------------------*/
+
+        for (var i=0; i<info.length; i++) {
+
+            showData    = data[i].name;                                                     //Data request: name
+            showData2   = data[i].homepage_url;                                             //Data request: url                       
+            showData3   = data[i]._id.$oid;                                                 //Data request: id
+            showData4   = data[i].products;
+            showData5   = data[i].relationships;
+
+            var constructor = {
+                    name    :showData,
+                    url     :showData2,
+                    id      :showData3,
+                    products:showData4,
+                    members :showData5
+            }
+
+            companiesJson.push(constructor);
+
+            names.push(showData);
+            $("select").append("<option value="+showData+">"+showData+"</option>");
+        
+        }
+
+    });
+
+        
+        /*-------------------------------------------- Selected options---------------------------------------*/
+
+$("select").change(choose);
+
+function choose(){
+    containerClean();
+
+    for (var i=0; i<companiesJson.length; i++){
+        if (companiesJson[i].name == $("select").val()){
+
+            $("#maincontainer").append("<h3>"+companiesJson[i].name+"</h3>");
+            $("#maincontainer").append("<spam>"+companiesJson[i].url+"</spam>");
+            $("#maincontainer").append("<p>"+companiesJson[i].id+"</p>");
+            $("#maincontainer").append("<h4> List of products</h4>");
+            $("#maincontainer").append("<ol class='list-group'></ol>");
+            $("#maincontainer").append("<h4>Currently active staff</h4>");
+            $("#maincontainer").append("<ul class='list-group'></ul>");
+
+            
+            if($("#productbox").prop('checked')){
+                for (var j=0; j<companiesJson[i].products.length; j++){                                //Products
+                    $("ol").append("<il>"+companiesJson[i].products[j].name+"</il>");
+                }
+            }
+             
+            if($("#staffbox").prop('checked')){                                             
+                for (var j=0; j<companiesJson[i].members.length; j++){                                      //Staff
+
+                    var firstname   = companiesJson[i].members[j].person.first_name;
+                    var lastname    = companiesJson[i].members[j].person.last_name;
+                    var title       = companiesJson[i].members[j].title;
+                    var current     = companiesJson[i].members[j].is_past;
+
+                    if(!current){
+                        $("ul").append("<il class='list-group-item'>First name: "+firstname+" Last name: "+lastname+" Title: "+title+"</il>");
+                    }
+                }
+            }
         }
 
     }
-
-    
-
-    /*-------------------------------------------- GET for company object-----------------------------------------*/
-    //No me queda claro es showData1 o showData3
-    /*for (var i=0; i<info.length; i++) {
-
-        var showData    = data[i];                                                     //Data request: name           
-        var showData3   = data[i]._id;                                                 //Data request: id object
-
-        console.log(" Object: "+showData);
-        console.log(" Object: "+showData3);
-    }*/
-
-    /*-------------------------------------------- GET for name and products---------------------------------------*/
-    /*for (var i=0; i<info.length; i++) {
-
-        var showData    = data[i].name;                                                 //Data request: name
-        var showData2   = data[i].products;
-
-        for (var j=0; j<showData2.length; j++) {
-
-            var prod    = showData2[j].name;                                            //Data request: products by name
-            console.log("Nombre : "+showData+" productos: "+prod);                      
-        }
-    }*/
-
-    /*-------------------------------------------- GET for name, staff and position---------------------------------------*/
-    
-    //Mantiene un filtro según los que trabajan actualmente o no
-    /*for (var i=0; i<info.length; i++) {
-
-        var showData    = data[i].name;                                                 //Data request: name
-        var showData2   = data[i].relationships;
-
-        for (var j=0; j<showData2.length; j++) {
-
-            var current         = showData2[j].is_past;                                             //Data request: staff currently working
-            if(!current){
-
-                var staffName       = showData2[j].person.first_name;                               //Data request: staff by first_name
-                var staffSurname    = showData2[j].person.last_name;                                //Data request: staff by last_name
-                var title           = showData2[j].title;                                           //Data request: staff by title
-
-                console.log("Empresa : "+showData+" nombre: "+staffName+" "+staffSurname+" y su puesto es: "+title);
-
-            }                      
-        }
-    }*/
-
-
-    console.log(names);
-
-});
+}

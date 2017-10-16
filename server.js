@@ -16,28 +16,14 @@ app.use("/img", express.static(__dirname + '/img'));
 
 app.get("/company", function(req, res){
 	res.sendFile(__dirname + ("/index.html"))
-	//res.status(200).send("Hecho");
 })
-
-/**/
 
 app.get("/company/:companyName", function(req, res){
 
 })
 
 app.post("/company", function(req, res){
-	console.log("POST /company");
 	console.log(done);
-
-	/*let companies = new companies();
-	companies.name 	= "nametest";
-	companies.link 	= "linktest";
-	companies.id 	= "testid";
-
-	companies.save(( err,function (companyStored){
-		if (err) throw err 
-		res.status(200).send({companies:companyStored})
-	});*/
 })
 
 app.put("/company/:companyName", function(req, res){
